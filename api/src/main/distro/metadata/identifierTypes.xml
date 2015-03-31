@@ -1,0 +1,5 @@
+<!-- Patient identifier types used by KenyaEMR, listed A-Z -->
+<refs type="IdentifierType">
+    <ref key="CLIENTNUMBER" uuid="1175607e-e7dc-11e3-95fe-2c4138029b5d" />
+
+</refs>
