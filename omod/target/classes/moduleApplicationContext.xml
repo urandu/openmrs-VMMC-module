@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!-- Apps -->
+
+	<bean id="bootcampaddon.app.example" factory-bean="kenyacore.appFactoryBean" factory-method="createInstance">
+		<constructor-arg value="bootcampaddon.bootcampaddon" />
+		<constructor-arg value="VMMC" />
+		<constructor-arg value="bootcampaddon/example/home.page" />
+		<constructor-arg value="bootcampaddon:apps/example.png" />
+		<constructor-arg value="700" />
+	</bean>
+
+
+
+
+
+	<!-- Forms -->
+
+	<bean id="bootcampaddon.form.example" class="org.openmrs.module.kenyacore.form.FormDescriptor">
+		<property name="targetUuid" value="b694b1bc-2086-47dd-a4ad-ba48f9471e4b" />
+		<property name="apps">
+			<set>
+				<ref bean="kenyaemr.app.clinician" />
+				<ref bean="kenyaemr.app.chart" />
+			</set>
+		</property>
+		<property name="icon" value="bootcampaddon:forms/example.png" />
+		<property name="htmlform" value="bootcampaddon:example.xml" />
+        <property name="gender" value="MALE" />
+	</bean>
+
+    <bean id="bootcampaddon.form.vmmccf" class="org.openmrs.module.kenyacore.form.FormDescriptor">
+        <property name="targetUuid" value="6c1dbfb4-e4ab-11e3-b0e8-2c4138029b5d" />
+        <property name="apps">
+            <set>
+                <ref bean="kenyaemr.app.clinician" />
+                <ref bean="kenyaemr.app.chart" />
+            </set>
+        </property>
+        <property name="icon" value="bootcampaddon:forms/example.png" />
+        <property name="htmlform" value="bootcampaddon:vmmccf.html" />
+        <property name="gender" value="MALE" />
+    </bean>
+
+
+    <bean id="bootcampaddon.form.followup" class="org.openmrs.module.kenyacore.form.FormDescriptor">
+        <property name="targetUuid" value="b3ac7520-e6f2-11e3-b973-2c4138029b5d" />
+        <property name="apps">
+            <set>
+                <ref bean="kenyaemr.app.clinician" />
+                <ref bean="kenyaemr.app.chart" />
+            </set>
+        </property>
+        <property name="icon" value="bootcampaddon:forms/example.png" />
+        <property name="htmlform" value="bootcampaddon:followup.html" />
+        <property name="gender" value="MALE" />
+    </bean>
+
+    <bean id="bootcampaddon.form.medicalhistory" class="org.openmrs.module.kenyacore.form.FormDescriptor">
+        <property name="targetUuid" value="bd964390-eae4-11e3-8ad5-2c4138029b5d" />
+        <property name="apps">
+            <set>
+                <ref bean="kenyaemr.app.clinician" />
+                <ref bean="kenyaemr.app.chart" />
+            </set>
+        </property>
+        <property name="icon" value="bootcampaddon:forms/example.png" />
+        <property name="htmlform" value="bootcampaddon:medicalhistory.html" />
+        <property name="gender" value="MALE" />
+    </bean>
+
+
+    <bean id="bootcampaddon.form.eligibility" class="org.openmrs.module.kenyacore.form.FormDescriptor">
+        <property name="targetUuid" value="7cbb0c06-eaea-11e3-8624-2c4138029b5d" />
+        <property name="apps">
+            <set>
+                <ref bean="kenyaemr.app.clinician" />
+                <ref bean="kenyaemr.app.chart" />
+            </set>
+        </property>
+        <property name="icon" value="bootcampaddon:forms/example.png" />
+        <property name="htmlform" value="bootcampaddon:eligibility.html" />
+        <property name="gender" value="MALE" />
+    </bean>
+
+
+
+
+    <bean id="bootcampaddon.config.form" class="org.openmrs.module.kenyacore.form.FormConfiguration">
+		<!-- Example of adding a form to the general visit form list -->
+		<property name="commonVisitForms">
+			<set>
+				<!--<ref bean="bootcampaddon.form.example" />-->
+
+                <!--<ref bean="bootcampaddon.form.followup" />-->
+                <!--<ref bean="bootcampaddon.form.medicalhistory" />-->
+                <!--<ref bean="bootcampaddon.form.eligibility" />-->
+
+
+
+			</set>
+		</property>
+
+		<!-- Example of adding a form to the HIV program visit form list -->
+		<!--<property name="programVisitForms">
+			<map>
+				<entry key-ref="kenyaemr.program.hiv">
+					<set><ref bean="keaddonexample.form.example" /></set>
+				</entry>
+			</map>
+		</property>-->
+
+		<!-- Example of disabling an existing form. This form will no longer appear in the "Available Forms" list -->
+		<property name="disabledForms">
+			<set>
+				<ref bean="kenyaemr.common.form.progressNote" />
+			</set>
+		</property>
+	</bean>
+
+
+
+
+
+    <!--Program-->
+    <bean id="bootcampaddon.program.vmmc" class="org.openmrs.module.kenyacore.program.ProgramDescriptor">
+        <property name="targetUuid" value="55d37fdf-3d76-4c1a-b3c8-e14906a586c8" />
+        <property name="eligibilityCalculation" value="org.openmrs.module.bootcampaddon.calculation.EligibleForVmmcProgramCalculation" />
+        <property name="defaultEnrollmentForm" ref="bootcampaddon.form.vmmccf" />
+        <property name="defaultCompletionForm" ref="bootcampaddon.form.followup" />
+        <property name="patientForms">
+            <set>
+                <ref bean="bootcampaddon.form.vmmccf" />
+                <ref bean="bootcampaddon.form.medicalhistory" />
+
+            </set>
+        </property>
+        <property name="visitForms">
+            <set>
+                <ref bean="bootcampaddon.form.vmmccf" />
+                <ref bean="bootcampaddon.form.medicalhistory" />
+
+            </set>
+        </property>
+        <property name="reports">
+        <set>
+          <!--  <ref bean="bootcampaddon.vmmc.report.inProgram" />-->
+            <ref bean="bootcampaddon.common.report.inprogram" />
+            <ref bean="bootcampaddon.common.report.testedAtEnrollment"/>
+            <ref bean="bootcampaddon.common.report.testedAtClinic"/>
+            <!--<ref bean="bootcampaddon.common.report.indicator.bootcampaddon"  />-->
+            <ref bean="bootcampaddon.common.report.indicator.moh362"/>
+            <ref bean="bootcampaddon.common.report.indicator.httcSummary"/>
+
+        </set>
+        </property>
+        <property name="fragments">
+            <map>
+                <entry key="enrollment-summary" value="bootcampaddon:program/vmmc/vmmcEnrollmentSummary" />
+                <entry key="care-panel" value="bootcampaddon:program/vmmc/vmmcCarePanel" />
+                <entry key="completion-summary" value="bootcampaddon:program/vmmc/vmmcCompletionSummary" />
+            </map>
+        </property>
+        <!--<property name="htmlform" value="modulehiv:enroll/addPatient.html" />-->
+        <property name="order" value="5000" />
+    </bean>
+
+
+
+
+
+    <bean id="bootcampaddon.vmmc.identifier.cln" class="org.openmrs.module.kenyacore.identifier.IdentifierDescriptor">
+        <property name="targetUuid" value="1175607e-e7dc-11e3-95fe-2c4138029b5d" />
+        <property name="order" value="60" />
+    </bean>
+
+    <bean id="bootcampaddon.vmmc.identifier.trn" class="org.openmrs.module.kenyacore.identifier.IdentifierDescriptor">
+        <property name="targetUuid" value="53917e7e-eafd-11e3-af5d-2c4138029b5d" />
+        <property name="order" value="70" />
+    </bean>
+
+    <!--Reports-->
+
+    <bean id="bootcampaddon.common.report.inprogram" class="org.openmrs.module.kenyacore.report.CalculationReportDescriptor">
+        <property name="targetUuid" value="07798215-b77e-4f95-9baa-4cbe59225698" />
+        <property name="name" value="In VMMC Program" />
+        <property name="description" value="All Patients in VMMC Program" />
+        <property name="calculation" value="org.openmrs.module.bootcampaddon.calculation.vmmc.InProgramCalculation" />
+        <property name="apps"><set><ref bean="kenyaemr.app.reports" /></set></property>
+
+    </bean>
+
+    <bean id="bootcampaddon.common.report.testedAtEnrollment" class="org.openmrs.module.kenyacore.report.CalculationReportDescriptor">
+        <property name="targetUuid" value="228a7495-c4aa-4fa4-9840-412f557b54f1" />
+        <property name="name" value="Tested for HIV at Enrollment" />
+        <property name="description" value="All Patients Tested at Enrollment" />
+        <property name="calculation" value="org.openmrs.module.bootcampaddon.calculation.vmmc.HivTestedAtVmmcEnrollmentCalculation" />
+        <property name="apps"><set><ref bean="kenyaemr.app.reports" /></set></property>
+
+    </bean>
+
+    <bean id="bootcampaddon.common.report.testedAtClinic" class="org.openmrs.module.kenyacore.report.CalculationReportDescriptor">
+        <property name="targetUuid" value="5e5dbeef-c45d-4789-8178-d4621d6b2cb2" />
+        <property name="name" value="All Patients Tested at VMMC Clinic" />
+        <property name="description" value="All Patients tested at VMMC Program" />
+        <property name="calculation" value="org.openmrs.module.bootcampaddon.calculation.vmmc.TestedForHivAtVmmcProgramCalculation" />
+        <property name="apps"><set><ref bean="kenyaemr.app.reports" /></set></property>
+
+    </bean>
+
+    <!--<bean id="bootcampaddon.common.report.indicator.bootcampaddon" class="org.openmrs.module.kenyacore.report.IndicatorReportDescriptor">-->
+        <!--<property name="targetUuid" value="196a0903-7470-4e76-9d42-501ae83924db" />-->
+        <!--<property name="name" value="MOH 362" />-->
+        <!--<property name="description" value="HTC VMMC Facility Reporting Form" />-->
+        <!--<property name="apps"><set><ref bean="kenyaemr.app.reports" /></set></property>-->
+        <!--&lt;!&ndash;<property name="template" value="bootcampaddon:bootcampaddon.xls" />&ndash;&gt;-->
+    <!--</bean>-->
+
+    <bean id="bootcampaddon.common.report.indicator.moh362" class="org.openmrs.module.kenyacore.report.IndicatorReportDescriptor">
+        <property name="targetUuid" value="196a0903-7470-4e76-9d42-501ae83924db" />
+        <property name="name" value="MOH 362" />
+        <property name="description" value="HTC VMMC Facility Reporting Form" />
+        <property name="apps"><set><ref bean="kenyaemr.app.reports" /></set></property>
+        <!--<property name="template" value="moh362:moh362.xls" />-->
+    </bean>
+
+    <bean id="bootcampaddon.common.report.indicator.httcSummary" class="org.openmrs.module.kenyacore.report.IndicatorReportDescriptor">
+        <property name="targetUuid" value="b1a8a822-5dc4-4005-95de-1d9e63ae2ea8" />
+        <property name="name" value="HTC and VMMC Department Facility Report" />
+        <property name="description" value="HTC Facility Reporting Form" />
+        <property name="apps"><set><ref bean="kenyaemr.app.reports" /></set></property>
+        <!--<property name="template" value="moh362:moh362.xls" />-->
+    </bean>
+
+
+</beans>

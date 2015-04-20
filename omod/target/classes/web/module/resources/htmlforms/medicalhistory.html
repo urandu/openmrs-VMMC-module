@@ -1,0 +1,206 @@
+<htmlform >
+
+<script type="text/javascript">
+    var NO = 1066;
+    var YES = 1065;
+
+    beforeSubmit.push(function () {
+        if (validateRequiredFields()) {
+            return true;
+        }
+        return false;
+    });
+    function onEvent1Change() {
+        if (getValue('event1.value') == YES) {
+            jq('#event1result :input').prop('disabled', false);
+        } else if (getValue('event1.value') == NO) {
+            jq('#event1result :input').prop('disabled', true);
+        }
+    }
+    function onEvent2Change() {
+        if (getValue('event2.value') == YES) {
+            jq('#event2result :input').prop('disabled', false);
+        } else if (getValue('event2.value') == NO) {
+            jq('#event2result :input').prop('disabled', true);
+        }
+    }
+    function onEvent3Change() {
+        if (getValue('event3.value') == YES) {
+            jq('#event3result :input').prop('disabled', false);
+        } else if (getValue('event3.value') == NO) {
+            jq('#event3result :input').prop('disabled', true);
+        }
+    }
+    jq(function() {
+
+        jq('#event1 input').click(onEvent1Change);
+        jq('#event2 input').click(onEvent2Change);
+        jq('#event3 input').click(onEvent3Change);
+
+        onEvent1Change();
+        onEvent2Change();
+        onEvent3Change();
+        jq('#event3result :input').prop('disabled', true);
+        jq('#event2result :input').prop('disabled', true);
+        jq('#event1result :input').prop('disabled', true);
+
+    });
+    function validateRequiredFields() {
+
+        var Event1 = getValue('event1.value');
+        var Event1result = getValue('event1result.value');
+        if (Event1 == YES &amp;&amp; Event1result == "") {
+            getField('event1result.error').html('Please specify').show();
+
+            return false;
+        }
+        var Event2 = getValue('event2.value');
+        var Event2result = getValue('event2result.value');
+        if (Event2 == YES &amp;&amp; Event2result == "") {
+            getField('event2result.error').html('Please specify').show();
+
+            return false;
+        }
+        var Event3 = getValue('event3.value');
+        var Event3result = getValue('event3result.value');
+        if (Event3 == YES &amp;&amp; Event3result == "") {
+            getField('event3result.error').html('Please specify').show();
+
+            return false;
+        }
+
+        return true;
+    }
+
+
+</script>
+
+<style type="text/css">
+    table.hei {
+
+        background-color: #99CCFF;
+    }
+    table.hei > tbody > tr > td, table.hei > tbody > tr > th{
+        border: 2px solid black;
+        vertical-align: baseline;
+        padding: 10px;
+        text-align: left;
+    }
+
+</style>
+
+<div class="ke-form-header">
+    <table width="100%">
+        <tr>
+            <td>Date <encounterDate id="encounter-date" showTime="true"/></td>
+            <td>Provider <encounterProvider default="currentUser" /></td>
+            <td>Location <encounterLocation default="GlobalProperty:kenyaemr.defaultLocation" /></td>
+        </tr>
+    </table>
+</div>
+
+<div class="ke-form-content">
+
+    <div>
+        <table class="hei">
+            <tr>
+                <td>
+                    <fieldset>
+                        <legend>E: CIRCUMCISION FOLLOW-UP # 1</legend>
+                        <table width="100%" border="0" class="tb" cellspacing="10">
+                            <tr>
+                                <td>E1: Date of visit</td>
+                                <td><obs required = "true" conceptId="5096AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" /></td>
+                            </tr>
+                            <tr>
+                                <td>E2: Type of visit</td>
+                                <td><obs required = "true" conceptId="160530AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160523AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,96fd8311-eb30-4d4f-bc50-5c80942b36eb" answerLabels="Routine,Client initiated/ unscheduled/ additional follow-up recommended by physician"  /></td>
+                            </tr>
+                            <tr>
+                                <td>E3: Are there symptoms of an Adverse Event?</td>
+                                <td><obs style = "radio" id = "event1" required = "true" conceptId="1729AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds= "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="Yes,No"/></td>
+                            </tr>
+                            <tr>
+                                <td>E4: If Yes, how would you rate it? (mild/moderate/severe)</td>
+                                <td><obs id = "event1result" conceptId="159411AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="Mild,Moderate,Severe" /></td>
+                            <tr>
+                                <td>E5: Recommendations/ Treatment/ Comments::</td>
+                                <td><obs conceptId="161011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" /></td>
+                            </tr>
+                            </tr>
+                        </table>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <fieldset>
+                        <legend>E: CIRCUMCISION FOLLOW-UP # 2</legend>
+                        <table width="100%" border="0" class="tb" cellspacing="10">
+                            <tr>
+                                <td>E1: Date of visit</td>
+                                <td><obs required = "true"  conceptId="5096AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" /></td>
+                            </tr>
+                            <tr>
+                                <td>E2: Type of visit</td>
+                                <td><obs required = "true"  conceptId="160530AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160523AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,96fd8311-eb30-4d4f-bc50-5c80942b36eb" answerLabels="Routine,Client initiated/ unscheduled/ additional follow-up recommended by physician"  /></td>
+                            </tr>
+                            <tr>
+                                <td>E3: Are there symptoms of an Adverse Event?</td>
+                                <td><obs style = "radio" id = "event2" required = "true" conceptId="1729AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds= "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="Yes,No"/></td>
+                            </tr>
+                            <tr>
+                                <td>E4: If Yes, how would you rate it? (mild/moderate/severe)</td>
+                                <td><obs id = "event2result" conceptId="159411AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="Mild,Moderate,Severe" /></td>
+                            <tr>
+                                <td>E5: Recommendations/ Treatment/ Comments::</td>
+                                <td><obs conceptId="161011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" /></td>
+                            </tr>
+                            </tr>
+                        </table>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <fieldset>
+                        <legend>E: CIRCUMCISION FOLLOW-UP # 3</legend>
+                        <table width="100%" border="0" class="tb" cellspacing="10">
+                            <tr>
+                                <td>E1: Date of visit</td>
+                                <td><obs required = "true" conceptId="5096AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" /></td>
+                            </tr>
+                            <tr>
+                                <td>E2: Type of visit</td>
+                                <td><obs required = "true" conceptId="160530AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160523AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,96fd8311-eb30-4d4f-bc50-5c80942b36eb" answerLabels="Routine,Client initiated/ unscheduled/ additional follow-up recommended by physician" /></td>
+                            </tr>
+                            <tr>
+                                <td>E3: Are there symptoms of an Adverse Event?</td>
+                                <td><obs style = "radio" id = "event3" required = "true" conceptId="1729AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds= "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="Yes,No"/></td>
+                            </tr>
+                            <tr>
+                                <td>E4: If Yes, how would you rate it? (mild/moderate/severe)</td>
+                                <td><obs id = "event3result" conceptId="159411AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="Mild,Moderate,Severe" /></td>
+
+                            <tr>
+                                <td>E5: Recommendations/ Treatment/ Comments::</td>
+                                <td><obs conceptId="161011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" /></td>
+
+                            </tr>
+                            </tr>
+                        </table>
+                    </fieldset>
+                </td>
+            </tr>
+        </table>
+        <div class="ke-form-footer">
+            <submit />
+        </div>
+
+
+
+    </div>
+
+</div>
+
+</htmlform>

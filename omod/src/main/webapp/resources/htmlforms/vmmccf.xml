@@ -1,0 +1,14 @@
+<fieldset>
+    <legend>B3: CLIENT PRESENTING WITH</legend>
+    <table width="100%" border="0" class="tb" cellspacing="10">
+        <tr>
+            <td>(1) Urethral discharge</td>
+            <td><obs conceptId="119481AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" /></td>
+        </tr>
+        <tr>
+            <td>(2) Genital sore</td>
+            <td><obs conceptId="119481AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" /></td>
+        </tr>
+
+    </table>
+</fieldset>
